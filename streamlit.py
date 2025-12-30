@@ -37,18 +37,18 @@ DATA_DIR = APP_DIR / "Data"
 MODELS_DIR = APP_DIR / "Models"
 
 MODEL_JOBLIB = MODELS_DIR / "rf_fraud_model.joblib"
-FEATURES_JSON = MODELS_DIR / "rf_features.json"
+FEATURES_JSON = MODELS_DIR / "rf_feature_list.json"
 FEATURES_PKL = APP_DIR / "novapay_feature_columns.pkl"
 
-SHAP_VALUES_FILE = APP_DIR / "shap_values_rf.npy"
-XTEST_SHAP_FILE = Models/X_test_for_shap (2).csv
+SHAP_VALUES_FILE = APP_DIR / "shap_values_rf(2).npy"
+XTEST_SHAP_FILE = APP_DIR / "X-test-for-shap(2).npy"
 
 
 # -----------------------------
 # Page setup
 # -----------------------------
 st.set_page_config(
-    page_title="NovaPay | Fraud Defense",
+    page_title="NovaPay | Fraud Detector",
     page_icon="🛡️",
     layout="wide",
 )
@@ -228,8 +228,8 @@ def load_shap_assets() -> Tuple[Optional[np.ndarray], Optional[pd.DataFrame]]:
 st.markdown(
     """
 <div class="card">
-  <span class="badge">AI-Assisted Fraud Defense</span>
-  <h1 style="margin:0.2rem 0 0.2rem 0;">🛡️ NovaPay Fraud Defense Platform</h1>
+  <span class="badge">AI-Assisted Fraud Detector</span>
+  <h1 style="margin:0.2rem 0 0.2rem 0;">🛡️ NovaPay Fraud Detection Platform</h1>
   <div class="small-muted">
     Score transactions • Assign risk tiers • Review top-risk cases • Explain with SHAP (global)
   </div>
