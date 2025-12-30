@@ -41,7 +41,7 @@ FEATURES_JSON = MODELS_DIR / "rf_features.json"
 FEATURES_PKL = APP_DIR / "novapay_feature_columns.pkl"
 
 SHAP_VALUES_FILE = APP_DIR / "shap_values_rf.npy"
-XTEST_SHAP_FILE = APP_DIR / "X_test_for_shap.csv"
+XTEST_SHAP_FILE = Models/X_test_for_shap (2).csv
 
 
 # -----------------------------
