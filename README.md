@@ -1,182 +1,194 @@
-# 🛡️ NovaPay – AI-Assisted Fraud Detection Platform
+# 🛡️ NovaPay Fraud Detection System
 
-An end-to-end **machine learning fraud detection system** for digital money transfers, featuring advanced data engineering, explainable AI, and an interactive Streamlit dashboard for real-time fraud scoring.
+An end-to-end **AI-driven fraud detection system** for digital money transfers, designed to identify, explain, and manage fraudulent transactions with high precision and strong recall.
+
+This project demonstrates the **complete data science lifecycle** — from raw data cleaning to model explainability and deployment — using real-world fraud detection logic.
 
 ---
 
-## 🚀 Project Overview
+## 📌 Project Overview
 
-NovaPay Fraud Detection is a complete data science and AI deployment project that:
+Digital payment platforms face increasing fraud risks due to:
+- High transaction volumes
+- Cross-border transfers
+- Device and IP spoofing
+- Rapid transaction velocity
 
-- Detects fraudulent digital money transfer transactions  
-- Uses **machine learning models** optimized for imbalanced data  
-- Provides **explainable predictions** using SHAP  
-- Deploys a **modern, AI-assisted web interface** for batch and real-time scoring  
+The **NovaPay Fraud Detection System** was built to address these challenges by:
 
-The project follows a **production-ready ML lifecycle**, from raw data ingestion to deployment.
+- Cleaning and standardizing messy transactional data  
+- Engineering fraud-relevant behavioral features  
+- Training and comparing multiple machine learning models  
+- Prioritizing **precision-critical fraud detection**  
+- Explaining model decisions using SHAP  
+- Providing an interactive Streamlit interface for analysts  
 
 ---
 
 ## 🎯 Objectives
 
-- Identify high-risk transactions with high precision and recall  
-- Understand *why* transactions are flagged as fraud  
-- Provide a clean, intuitive interface for non-technical users  
-- Demonstrate real-world ML engineering and deployment skills  
+- Detect fraudulent transactions with **very high precision**
+- Minimize false positives (critical in financial systems)
+- Provide **interpretable fraud decisions**
+- Allow analysts to review, score, and monitor transactions
+- Demonstrate production-ready ML practices
 
 ---
 
-## 🧠 Solution Architecture
+## 🧠 Machine Learning Approach
 
-```
-Raw Data
-   ↓
-Data Cleaning & Validation
-   ↓
-Exploratory Data Analysis (EDA)
-   ↓
-Feature Engineering
-   ↓
-Model Training & Evaluation
-   ↓
-Explainability (SHAP)
-   ↓
-Deployment (Streamlit AI Dashboard)
-```
+### Models Trained & Evaluated
+The project trains and compares **8 classification models**, including:
+
+- Random Forest ⭐ (best performing)
+- XGBoost
+- Logistic Regression
+- Decision Tree
+- Gradient Boosting
+- AdaBoost
+- K-Nearest Neighbors
+- Support Vector Machine
+
+Each model is evaluated using:
+- Precision
+- Recall
+- F1-Score
+- ROC-AUC
+
+> **Key Result:**  
+> The **Random Forest model** achieved **precision ≈ 1.00** while maintaining strong recall, making it the preferred model for deployment.
 
 ---
 
 ## 📂 Project Structure
 
-```
-NovaPay-Fraud-Detection/
+NovaPay-Fraud-Detection-AI-Platform/
 │
-├── app.py                       # Streamlit AI dashboard
-├── requirements.txt             # Python dependencies
-├── README.md                    # Project documentation
-│
-├── .streamlit/
-│   └── config.toml              # Dark AI-themed UI configuration
+├── Data/
+│ ├── nova_pay_transcations.csv
+│ ├── nova_pay_fraud_boost.csv
+│ └── Nova_cleaned_df.csv
 │
 ├── notebooks/
-│   ├── Data_Cleaning_NOVAPAY.ipynb
-│   ├── EDA_NOVAPAY.ipynb
-│   ├── Feature_Engrn_NOVAPAY.ipynb
-│   ├── Model_Training_NOVAPAY.ipynb
-│   └── SHAP_EXPLANABILITY_RF.ipynb
+│ ├── Data_Cleaning.ipynb
+│ ├── EDA.ipynb
+│ ├── Feature_Engineering.ipynb
+│ ├── Model_Training_Comparison.ipynb
+│ └── SHAP_Explainability.ipynb
 │
 ├── models/
-│   └── novapay_fraud_model_rf.pkl
+│ ├── rf_fraud_model.joblib
+│ ├── rf_features.json
+│ └── shap_values_rf.npy
 │
-└── data/
-    └── (optional / sample data only)
-```
+├── streamlit.py
+├── requirements.txt
+└── README.md
 
 ---
 
-## 🧪 Data Processing & Analysis
+## 🧹 Data Cleaning Highlights
 
-### 1️⃣ Data Cleaning
-- Removed duplicate transaction records  
-- Fixed inconsistent categories (channels, currencies, KYC tiers)  
-- Handled missing values using **domain-aware logic**  
-- Corrected invalid numeric values (negative amounts, scores)  
+- Combined multiple transaction datasets
+- Removed duplicates and invalid records
+- Standardized inconsistent categories:
+  - Channels (ATM / WEB / MOBILE)
+  - Countries
+  - KYC tiers
+- Corrected invalid ranges:
+  - Negative transaction amounts
+  - Out-of-range risk scores
+- Intelligently handled missing values
+- Converted all data types correctly
 
-### 2️⃣ Exploratory Data Analysis (EDA)
-Key findings:
-- Fraud transactions show **higher transaction velocity**
-- Lower **device trust scores** strongly correlate with fraud
-- **New accounts** are significantly riskier
-- Certain **corridors and channels** carry higher fraud risk
-- No data leakage detected
-
----
-
-## 🧬 Feature Engineering
-
-Engineered features include:
-- Transaction velocity ratios
-- Account maturity indicators
-- Device and IP risk interactions
-- Time-based features (hour, day, month)
-- Corridor and currency risk indicators
-
-This step significantly improved model performance.
+Result: **A clean, modeling-ready dataset with 11,000+ transactions**
 
 ---
 
-## 🤖 Model Training & Evaluation
+## 📊 Exploratory Data Analysis (EDA)
 
-### Models Tested
-- Dummy Classifier (baseline)
-- Logistic Regression (balanced)
-- Random Forest
-- XGBoost
+Key fraud patterns discovered:
 
-### Final Model
-✅ **Random Forest Classifier**
+- Fraudulent transactions show **higher IP risk scores**
+- **Low device trust scores** strongly correlate with fraud
+- Fraudsters perform **many transactions in short time windows**
+- Newer accounts are more likely to be fraudulent
+- Certain corridors and channels carry elevated risk
 
-Chosen for:
-- Strong ROC-AUC and PR-AUC
-- Robust handling of non-linear patterns
-- Interpretability with SHAP
+These insights directly informed feature engineering and model design.
 
 ---
 
-## 🔍 Explainable AI (SHAP)
+## ⚙️ Feature Engineering
 
-To ensure trust and transparency:
-- SHAP values were computed for the Random Forest model  
-- Global explanations identify **key fraud drivers**
-- Local explanations show *why a specific transaction was flagged*
+Advanced features include:
 
-Top drivers:
-- Transaction velocity
-- Device trust score
-- IP risk score
-- Account age
-- Corridor risk
+- Transaction velocity (1h, 24h)
+- Account age behavior
+- Device and IP trust indicators
+- Corridor risk signals
+- Time-based features (hour, day, weekend)
+- Aggregated behavioral metrics
 
----
-
-## 🖥️ Deployment – AI-Assisted Dashboard
-
-The system is deployed as a **Streamlit web application** with:
-
-- Batch CSV upload for scoring
-- Real-time single transaction scoring
-- Adjustable decision threshold
-- Model insights and feature importance
-- Dark AI-themed dashboard UI
-- https://novapay-ai-assisted-fraud-detection-platform-ja3dgckcyfdlb5qlg.streamlit.app/
+Feature engineering was designed to **mimic real fraud analyst logic**, not just statistical transformations.
 
 ---
 
-## ▶️ How to Run Locally
+## 🔍 Model Explainability (SHAP)
 
-```bash
+To ensure transparency and trust:
+
+- Global SHAP feature importance
+- Beeswarm plots for feature impact
+- Dependence plots for key drivers
+- Force plots for individual fraud decisions
+
+This allows:
+- Analyst validation
+- Regulatory defensibility
+- Clear explanation of why a transaction was flagged
+
+---
+
+## 🖥️ Deployment (Streamlit App)
+
+The Streamlit application provides:
+
+- Batch transaction scoring
+- Fraud probability and risk tiers
+- Precision-focused fraud flagging
+- Analyst-friendly dashboards
+- Explainability integration (optional)
+
+Designed to simulate a **real financial fraud operations console**.
+
+---
+
+## 🚀 How to Run the Project
+
+### 1️⃣ Install Dependencies
 pip install -r requirements.txt
-streamlit run app.py
-```
+2️⃣ Run the Streamlit App
+streamlit run streamlit.py
+3️⃣ Open in Browser
+http://localhost:8501
 
----
+📈 Key Takeaways
+Fraud detection requires precision-first thinking
 
-## 📈 Future Improvements
+Model explainability is essential in financial systems
 
-- Real-time API (FastAPI)
-- Streaming transaction ingestion
-- Auto-retraining pipeline
-- Advanced alerting & monitoring
+Feature engineering matters more than model complexity
 
----
+Random Forest provided the best balance of accuracy and stability
 
-## 👤 Author
+The project is fully extensible to real-world production systems
 
-**Idowu Malachi**  
-Data Scientist | Machine Learning Engineer  
+📬 Contact
+Author: Idowu Malachi
+📧 Email: idowumalachi@gmail.com
 
----
+For questions, feedback, or collaboration opportunities, feel free to reach out.
 
-## ⭐ Final Note
-
-This project demonstrates the full journey from raw data to a deployed, explainable AI system — reflecting real-world fraud detection challenges and solutions.
+🏁 Final Note
+This project was developed to reflect industry-grade fraud detection standards, combining strong analytics, sound ML practices, and real deployment considerations.
